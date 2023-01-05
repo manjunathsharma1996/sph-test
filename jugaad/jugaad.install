@@ -1,0 +1,70 @@
+<?php
+use Drupal\Core\Block\BlockManagerInterface;
+/*
+ * Implements hook_install().
+ */
+function jugaad_install() {
+    // Create a new content type.
+    $content_type = \Drupal\node\Entity\NodeType::create([
+      'name' => 'Product',
+      'type' => 'product',
+    ]);
+    $content_type->save();
+  
+    // Create a field for the content type.
+    $field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName("node", "product_image");
+    if ($field_storage == null) {
+        $field_storage = \Drupal\field\Entity\FieldStorageConfig::create([
+            'field_name' => 'product_image',
+            'entity_type' => 'node',
+            'type' => 'image',
+            'settings' => [
+                'max_resolution' => '1024x1024',
+                'min_resolution' => '640x480',
+            ],
+        ]);
+        $field_storage->save();
+    }
+  
+    $field = \Drupal\field\Entity\FieldConfig::create([
+        'field_storage' => $field_storage,
+        'bundle' => 'product',
+        'label' => 'Product Image',
+        'enabled' => TRUE
+    ]);
+    $field->enable();
+    $field->save();
+
+    $body_field_storage = \Drupal\field\Entity\FieldStorageConfig::loadByName("node", "body");
+    $body_field = \Drupal\field\Entity\FieldConfig::create([
+        'field_storage' => $body_field_storage,
+        'bundle' => 'product',
+        'label' => 'Product Description', // Rename the field to "My Body Field".
+        'enabled' => TRUE
+      ]);
+      
+      $body_field->setThirdPartySetting('field_ui', 'settings', 'default_status', 1)->save();
+
+    // $field_body = \Drupal\field\Entity\FieldConfig::loadByName("node", "product", "body");
+    // $field_body->setLabel('Product Description')->save();
+
+    $field_storage_link = \Drupal\field\Entity\FieldStorageConfig::loadByName("node", "product_link");
+    if ($field_storage_link == null) {
+        $field_storage_link = \Drupal\field\Entity\FieldStorageConfig::create([
+            'field_name' => 'product_link',
+            'entity_type' => 'node',
+            'type' => 'text',
+        ]);
+        $field_storage_link->save();
+    }
+
+  $field_link = \Drupal\field\Entity\FieldConfig::create([
+    'field_storage' => $field_storage_link,
+    'bundle' => 'product',
+    'label' => 'Product Link', // Rename the field to "My Body Field".
+    'enabled' => TRUE
+  ]);
+  $field_link->setThirdPartySetting('field_ui', 'settings', 'default_status', 1)->save();
+  
+
+}

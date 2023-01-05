@@ -1,0 +1,20 @@
+<?php
+/**
+ * Implements hook_theme().
+ */
+function jugaad_theme($existing, $type, $theme, $path) {
+  $themes = [
+  'qr_code_theme' => [
+      'variables' => [
+        'data' => [],
+      ],
+  ]
+];
+ 
+return $themes;	
+}
+
+function jugaad_preprocess_block(&$variables) {
+  // Disable caching for the entire block.
+  $variables['#cache']['max-age'] = 0;
+}

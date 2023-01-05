@@ -1,0 +1,6 @@
+name: Jugaad
+description: Jugaad Requirements are defined in this module
+package: Custom
+
+type: module
+core_version_requirement: ^9.4 || ^10
