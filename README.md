@@ -1,3 +1,15 @@
+1. A new module "jugaad" is now added.
+2. Demo site is available at https://dev-jugaad-patches-pvt-ltd-products-demo.pantheonsite.io/ 
+3. Administer Credentials : 
+    Username : manjunathsharma
+    Password : Jugaad@12345
+
+**Description:**
+    1. Module creates a content type and fields but these fields are disabled by default. 
+    2. Block is not placed in the region after installing the module. Manually it should be placed. 
+    3. Only two contents are created for demo. 
+    4. Used Endroid Library to generate QR Code. 
+
 Your customer "Jugaad Patches Pvt Ltd" wants to build their portal with Drupal 9. They sell their products only on their mobile app. (Yeah, that's not a great thing to do, but you know.) This website has just a listing of their products. 
 
 Each product page shows 
